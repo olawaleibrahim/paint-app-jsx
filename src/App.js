@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
-// import { Canvas } from "./components/Canvas";
-// import { Goo } from "./components/Goo";
+import { Canvas } from "./components/Canvas";
+import { Goo } from "./components/Goo";
 import { Intro } from "./components/Intro";
 import { Toolbar } from "./components/Toolbar";
 import { usePainter } from "./hooks/usePainter";
@@ -18,12 +18,12 @@ const App = () => {
   const toolbarProps = { ...state, ...api, dateUrl, handleDownload };
 
   return (
-    <>
+    <div>
       <Intro isReady={isReady} init={init} />
       <Toolbar {...toolbarProps} />
-      {/* <Canvas width={state.currentWidth} canvasRef={canvas} />
-      <Goo /> */}
-    </>
+      <Canvas width={state.currentWidth} canvasRef={canvas} />
+      <Goo />
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 
 export const usePainter = () => {
-  const canvas = useRef<HTMLCanvasElement>(null);  // check here (1)
+  const canvas = useRef();  // check here (1)
   const [isReady, setIsReady] = useState(false);
   const [isRegularMode, setIsRegularMode] = useState(true);
   const [isAutoWidth, setIsAutoWidth] = useState(false);
@@ -89,11 +89,11 @@ export const usePainter = () => {
     [drawOnCanvas, dynamicLineWidth],
   );
 
-  const stopDrawing = useCallback(() => {
+  const stopDrawing = useCallback(() => { 
     isDrawing.current = false;
   }, []);
 
-  const init = useCallback(() => {
+  const init = useCallback((canvas) => {  // check here
     ctx.current = canvas?.current?.getContext("2d");
     if (canvas && canvas.current && ctx && ctx.current) {
       canvas.current.addEventListener("mousedown", handleMouseDown);
@@ -136,7 +136,7 @@ export const usePainter = () => {
     selectedLineWidth.current = e.currentTarget.value;
   };
 
-  const handleClear = useCallback(() => {
+  const handleClear = useCallback((canvas) => {  // chedk here
     if (!ctx || !ctx.current || !canvas || !canvas.current) {
       return;
     }
